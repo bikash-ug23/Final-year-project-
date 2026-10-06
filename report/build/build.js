@@ -52,13 +52,19 @@ const gap=(a=40)=>new Paragraph({spacing:{after:a},children:[]});
 
 // ================= CONTENT =================
 const C=[];
-// ---- header block ----
-C.push(new Paragraph({alignment:AlignmentType.CENTER,spacing:{after:20},children:[imgRun("image1.png",0.6)]}));
-C.push(P("**NATIONAL INSTITUTE OF TECHNOLOGY SILCHAR, ASSAM (INDIA) – 788010**",{align:AlignmentType.CENTER,after:0,size:19}));
-C.push(P("DEPARTMENT OF ELECTRONICS AND COMMUNICATION ENGINEERING",{align:AlignmentType.CENTER,after:60,size:19}));
-C.push(P("**B. Tech. PROJECT REPORT (Mid-Semester Evaluation)**",{align:AlignmentType.CENTER,after:20,size:22}));
-C.push(P("**QUANTUM FACE RECOGNITION WITH MULTI-GATE QUANTUM CONVOLUTIONAL NEURAL NETWORK**",{align:AlignmentType.CENTER,after:40,size:26}));
-C.push(P("Submitted by: Subrata Lodh (2314051), Yesh Agarwal (2314080)   |   Supervisor: Dr. Banani Basu   |   Supervisor’s signature: ____________",{align:AlignmentType.CENTER,after:90,size:19}));
+// ---- cover page (layout of the original report's first page) ----
+const CV=[];
+const cvp=(t,o={})=>new Paragraph({alignment:AlignmentType.CENTER,spacing:{before:o.before||0,after:o.after||0,line:276},border:o.border,children:t?[new TextRun({text:t,font:FONT,size:28,bold:!!o.bold})]:[]});
+CV.push(cvp("B. Tech. PROJECT REPORT (Mid-Semester Evaluation)",{after:240,border:{bottom:{style:BorderStyle.SINGLE,size:6,color:"2E6E8E",space:6}}}));
+CV.push(cvp("QUANTUM FACE RECOGNITION WITH MULTI-GATE QUANTUM CONVOLUTIONAL NEURAL NETWORK",{bold:true,before:500}));
+CV.push(cvp("Submitted by:",{bold:true,before:900}));
+CV.push(cvp("Subrata Lodh (2314051),",{bold:true,before:600}));
+CV.push(cvp("Yesh Agarwal (2314080)",{bold:true}));
+CV.push(cvp("SUPERVISOR NAME: Dr. Banani Basu",{bold:true,before:1500}));
+CV.push(cvp("SUPERVISOR’S SIGNATURE",{bold:true,before:800}));
+CV.push(new Paragraph({alignment:AlignmentType.CENTER,spacing:{before:300,after:300},children:[imgRun("image1.png",2.0)]}));
+CV.push(cvp("DEPARTMENT OF ELECTRONICS AND COMMUNICATION ENGINEERING",{bold:true,before:400}));
+CV.push(cvp("NATIONAL INSTITUTE OF TECHNOLOGY SILCHAR, ASSAM (INDIA)-788010",{bold:true,before:500}));
 
 C.push(H1("Abstract"));
 C.push(P("Face recognition is one of the most widely deployed biometric technologies, and deep convolutional neural networks (CNNs) dominate it, but at a steadily growing computational cost [1, 2]. Quantum machine learning offers an alternative, yet today’s noisy intermediate-scale quantum (NISQ) devices provide only a handful of qubits, so a whole face image cannot be encoded with one qubit per pixel [3, 4]. This project studies and implements the multi-gate quantum convolutional neural network (MG-QCNN) of Zhu *et al.* [4], a hybrid model in which a four-qubit variational circuit acts as a convolution filter sliding over the image. Each 2×2 patch is angle-encoded with R~Y~ gates, processed by trainable R~Z~ and R~X~ rotations (eight parameters) and a CNOT chain, and read out as Pauli-Z expectation values; a fully connected layer classifies the resulting 24×24×4 feature maps."));
@@ -202,7 +208,9 @@ const doc=new Document({
  numbering:{config:[
   {reference:"b",levels:[{level:0,format:D.LevelFormat.BULLET,text:"•",alignment:AlignmentType.LEFT,style:{paragraph:{indent:{left:540,hanging:270}}}}]},
   {reference:"n",levels:[{level:0,format:D.LevelFormat.DECIMAL,text:"%1.",alignment:AlignmentType.LEFT,style:{paragraph:{indent:{left:540,hanging:300}}}}]}]},
- sections:[{properties:{page:{size:{width:12240,height:15840},margin:{top:900,bottom:900,left:1300,right:1300}}},
-  footers:{default:new Footer({children:[new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({children:[PageNumber.CURRENT],font:FONT,size:18})]})]})},
-  children:C}]});
+ sections:[
+  {properties:{page:{size:{width:12240,height:15840},margin:{top:1440,bottom:1440,left:1800,right:1800}}},children:CV},
+  {properties:{type:D.SectionType.NEXT_PAGE,page:{size:{width:12240,height:15840},margin:{top:900,bottom:900,left:1300,right:1300},pageNumbers:{start:1}}},
+   footers:{default:new Footer({children:[new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({children:[PageNumber.CURRENT],font:FONT,size:18})]})]})},
+   children:C}]});
 Packer.toBuffer(doc).then(b=>{fs.writeFileSync(OUT,b);console.log("written",OUT)});

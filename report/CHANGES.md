@@ -13,6 +13,6 @@
 
 **Updated**
 - Abstract, limitations, work plan (no classical baseline), expected outcomes (paper ablation numbers kept as verification targets only).
-- Report compressed from the original length to 7 pages.
+- Report compressed from 22 pages to a separate cover page (original layout) plus 7 pages of content.
 
 Not included: final augmented 10-seed Yale run (notebook output was truncated at seed 5).
