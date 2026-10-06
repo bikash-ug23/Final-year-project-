@@ -1,6 +1,7 @@
 # Changes to the mid-semester report (QCNN_Mid_1_1.docx -> QCNN_Mid_updated.docx)
 
 **Removed**
+- Section "Work Plan and Expected Outcomes" (work-plan table, expected outcomes, ablation targets) and the last sentence of Future Scope.
 - Table 5 / old Fig. 7 (the only original graph dropped: accuracy comparison with the reference paper) and the "Comparison with the reference paper" text.
 - Paper-vs-ours accuracy statements in the abstract, introduction, objectives, limitations and expected outcomes.
 - Table 1 (paper's circuit characteristics, now one sentence) (the old per-seed min–max vs Gaussian chart is kept as Fig. 6), Table 3 (epoch table, now in text), the Max row of the seed table.
@@ -13,6 +14,6 @@
 
 **Updated**
 - Abstract, limitations, work plan (no classical baseline), expected outcomes (paper ablation numbers kept as verification targets only).
-- Report compressed from 22 pages to a separate cover page (original layout) plus 8 pages of content (9 pages in total).
+- Report compressed from 22 pages to a separate cover page (original layout) plus 7 pages of content (8 pages in total); references are set in body-text size.
 
 Not included: final augmented 10-seed Yale run (notebook output was truncated at seed 5).

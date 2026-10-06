@@ -167,16 +167,8 @@ C.push(H1("5. Limitations"));
 C.push(P("The quantum part is a noise-free classical simulation with shot noise only at test time, so the numbers are not hardware results. The model over-fits on Yale (100% training accuracy on 120 images against about 85% test accuracy) and augmentation did not help. No ablation or noise study has been run yet, and test loss, precision, recall and F1-score are not yet reported. The final epoch is reported on the test set; a validation split was used for the Yale studies only."));
 
 C.push(H1("6. Future Scope"));
-C.push(P("Training here uses simulator backpropagation, which is fast but is not how a quantum processor is trained. Mathematically the gradients are identical to those of the parameter-shift rule, but in practice a real implementation must use the latter, and with 17 circuit runs per patch (9,792 per image per step, Eq. 10) training becomes very slow, as is also noted in the reference work [4]. A natural extension is to add a feature-extraction stage (for example a small learned or fixed classical front-end) that compresses the image before the quantum layer. Since the cost scales linearly with the number of patches *M* (Fig. 4a), reducing 576 patches to 144 or 36 would cut the circuit executions by 4× or 16×, and with a pretrained or fixed front-end only the eight quantum parameters would need shifted runs. An ablation should confirm that the quantum layer still contributes. Other extensions are further quantum layers, pooling and stronger regularisation against the Yale over-fitting."));
+C.push(P("Training here uses simulator backpropagation, which is fast but is not how a quantum processor is trained. Mathematically the gradients are identical to those of the parameter-shift rule, but in practice a real implementation must use the latter, and with 17 circuit runs per patch (9,792 per image per step, Eq. 10) training becomes very slow, as is also noted in the reference work [4]. A natural extension is to add a feature-extraction stage (for example a small learned or fixed classical front-end) that compresses the image before the quantum layer. Since the cost scales linearly with the number of patches *M* (Fig. 4a), reducing 576 patches to 144 or 36 would cut the circuit executions by 4× or 16×, and with a pretrained or fixed front-end only the eight quantum parameters would need shifted runs. An ablation should confirm that the quantum layer still contributes."));
 
-C.push(H1("7. Work Plan and Expected Outcomes"));
-C.push(CAP("**Table 3.** Proposed work plan.",{before:10,after:30,keepNext:true}));
-C.push(table([700,1500,7160],[["Phase","Period","Planned work"],
-["1","Oct–Nov 2026","Yale over-fitting study (regularisation, split details); test loss, precision, recall and F1-score for both datasets."],
-["2","Nov–Dec 2026","Ablations (without R~X~, without R~Z~, without entanglement, 3×3 kernel) and the single-measurement variant, ten seeds, both datasets; end-semester report."],
-["3","Jan–Feb 2027","Finite-shot sweeps, noisy-simulator experiments (depolarising, read-out), parameter-shift training on a small subset, trained filter on a cloud backend if access allows; feature-extraction front-end."],
-["4","Mar–Apr 2027","Final evaluation, code documentation, final thesis, paper draft and presentation."]]));
-C.push(P("**Expected outcomes.** (1) A verified, documented MG-QCNN implementation with an analytical description of its filter. (2) A statistically sound evaluation over ten splits. (3) Ablations of the R~X~ and R~Z~ rotations, entanglement and kernel size; the reference work reports ORL mean accuracies of 95.959% (full model), 92.917% (3×3 filter), 90.333% (no R~Z~), 89.333% (no R~X~) and 88.417% (no entanglement), which will serve as verification targets. (4) A study of finite shots and hardware-like noise, and a test on a noisy or real backend, which [4] leaves open. (5) A reduced-cost design via feature extraction, and a final thesis and paper-ready report.",{before:70}));
 C.push(H1("References"));
 const refs=[
 "M. Wang and W. Deng, “Deep face recognition: A survey,” *Neurocomputing*, vol. 429, pp. 215–244, Mar. 2021.",
@@ -202,7 +194,7 @@ const refs=[
 "A. Paszke *et al.*, “PyTorch: An imperative style, high-performance deep learning library,” in *Proc. NeurIPS*, vol. 32, 2019, pp. 8026–8037.",
 "K. Mitarai, M. Negoro, M. Kitagawa, and K. Fujii, “Quantum circuit learning,” *Phys. Rev. A*, vol. 98, no. 3, Art. no. 032309, 2018.",
 "M. Schuld, V. Bergholm, C. Gogolin, J. Izaac, and N. Killoran, “Evaluating analytic gradients on quantum hardware,” *Phys. Rev. A*, vol. 99, no. 3, Art. no. 032331, 2019."];
-refs.forEach((t,i)=>C.push(new Paragraph({alignment:AlignmentType.JUSTIFIED,spacing:{after:10,line:220},indent:{left:420,hanging:420},children:rich(`[${i+1}]\t${t}`,{size:16})})));
+refs.forEach((t,i)=>C.push(new Paragraph({alignment:AlignmentType.JUSTIFIED,spacing:{after:15,line:235},indent:{left:520,hanging:520},children:rich(`[${i+1}]\t${t}`)})));
 
 const doc=new Document({
  creator:"Project team",title:"MG-QCNN Mid-Semester Report",
